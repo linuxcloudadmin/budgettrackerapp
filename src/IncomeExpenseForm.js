@@ -35,14 +35,15 @@ function IncomeExpenseForm({ transactions, addTransaction, deleteTransaction, up
       : transactions.filter((transaction) => transaction.category === filter);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="transaction-form">
         <input
           type="text"
           name="description"
           placeholder="Description"
           value={formData.description}
           onChange={handleChange}
+          className="form-input"
         />
         <input
           type="number"
@@ -50,28 +51,31 @@ function IncomeExpenseForm({ transactions, addTransaction, deleteTransaction, up
           placeholder="Amount"
           value={formData.amount}
           onChange={handleChange}
+          className="form-input"
         />
-        <select name="category" value={formData.category} onChange={handleChange}>
+        <select name="category" value={formData.category} onChange={handleChange} className="form-select">
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
-        <button type="submit">Add Transaction</button>
+        <button type="submit" className="form-button">Add Transaction</button>
       </form>
 
-      <div>
+      <div className="filter-container">
         <label>Filter: </label>
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <select value={filter} onChange={(e) => setFilter(e.target.value)} className="form-select">
           <option value="all">All</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
       </div>
 
-      <ul>
+      <ul className="transaction-list">
         {filteredTransactions.map((transaction) => (
-          <li key={transaction.id}>
-            {transaction.description} - ${transaction.amount.toFixed(2)} ({transaction.category})
-            <button onClick={() => deleteTransaction(transaction.id)}>Delete</button>
+          <li key={transaction.id} className="transaction-item">
+            <span className="transaction-description">{transaction.description}</span>
+            <span className="transaction-amount">${transaction.amount.toFixed(2)}</span>
+            <span className="transaction-category">({transaction.category})</span>
+            <button onClick={() => deleteTransaction(transaction.id)} className="action-button">Delete</button>
             <button
               onClick={() =>
                 updateTransaction(transaction.id, {
@@ -80,6 +84,7 @@ function IncomeExpenseForm({ transactions, addTransaction, deleteTransaction, up
                   amount: parseFloat(prompt('Update Amount', transaction.amount)) || transaction.amount,
                 })
               }
+              className="action-button"
             >
               Edit
             </button>

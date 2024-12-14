@@ -12,11 +12,11 @@ function BudgetSummary({ transactions }) {
   const balance = income - expenses;
 
   return (
-    <div>
+    <div className="summary-container">
       <h2>Budget Summary</h2>
-      <p>Total Income: ${income.toFixed(2)}</p>
-      <p>Total Expenses: ${expenses.toFixed(2)}</p>
-      <p>Balance: ${balance.toFixed(2)}</p>
+      <p className="summary-item">Total Income: <span className="summary-income">${income.toFixed(2)}</span></p>
+      <p className="summary-item">Total Expenses: <span className="summary-expenses">${expenses.toFixed(2)}</span></p>
+      <p className="summary-item">Balance: <span className="summary-balance">${balance.toFixed(2)}</span></p>
     </div>
   );
 }
